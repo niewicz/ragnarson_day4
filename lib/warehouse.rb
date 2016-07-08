@@ -48,10 +48,12 @@ class Warehouse
     @products = []
   end
 
-  def display
+  def to_s
+    s = ""
     @products.each do |item|
-      puts "ID:\t#{item[:item]}\tQUANTITY:\t#{item[:count]}"
+      s += "ID:\t#{item[:item]}\tQUANTITY:\t#{item[:count]}\n"
     end
+    return s
   end
 
   private
@@ -74,4 +76,3 @@ class Warehouse
   end
   
 end
-

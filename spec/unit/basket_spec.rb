@@ -180,16 +180,20 @@ RSpec.describe Basket do
 	end
 
 
-	#context "#display" do
-	#	it "does not raise error" do
-	#		basket = Basket.new(@wh)
-	#		basket.add(1, 6)
-	#		basket.add(3, 1)
-	#		expect{
-	#			basket.display
-	#		}.to_not raise_error
-	#	end
-	#end
+	context "#to_s" do
+		it "properly converts to string" do
+			basket = Basket.new(@wh)
+			basket.add(1, 2)
+			expect(basket.to_s).to eql(
+				">>>BASKET\n" +
+				"ID\tNAME\tPRICE\tQUANT\t\n" +
+				"--------------------------------------\n" +
+				"1\tBook\t12.00\t2\t24.00\n" +
+				"--------------------------------------\n" +
+				"Sum:\t\t24.00\n" +
+				"With VAT:\t25.92\n")
+		end
+	end
 
 
 	after :example do
@@ -197,18 +201,3 @@ RSpec.describe Basket do
 	end
 
 end
-
-
-
-	#context "#find_in" do
-	#	it "return nil if not found" do
-	#		expect(Basket.new(@wh).find_in(1)).to eql(nil)
-	#	end
-	#
-	#	it "return index if found" do
-	#		basket = Basket.new(@wh)
-	#		basket.add(1, 10)
-	#		basket.add(2, 4)
-	#		expect(basket.find_in(2)).to eql(1)
-	#	end
-	#end

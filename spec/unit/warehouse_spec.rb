@@ -186,30 +186,13 @@ RSpec.describe Warehouse do
 	end
 
 
-	#context "#display" do
-	#	it "doesn't raise errors" do
-	#		warehouse = Warehouse.new([@p1, @p2])
-	#		warehouse.add(1, 10)
-	#		warehouse.add(2, 20)
-	#		expect{
-	#			warehouse.display
-	#		}.to_not raise_error
-	#	end
-	#end
+	context "#to_s" do
+		it "properly converts to string" do
+			warehouse = Warehouse.new([@p1, @p2])
+			warehouse.add(1, 10)
+			expect(warehouse.to_s).to eql(
+				"ID:\t1\tQUANTITY:\t10\n")
+		end
+	end
 	
 end
-
-
-	#context "#find_in" do
-	#	it "returns nil if given product_id not found" do
-	#		warehouse = Warehouse.new([@p1, @p2])
-	#		expect(warehouse.find_in(3)).to eql(nil)
-	#	end
-	#
-	#	it "returns index if given product_id found" do
-	#		warehouse = Warehouse.new([@p1, @p2])
-	#		warehouse.add(1, 10)
-	#		warehouse.add(2, 20)
-	#		expect(warehouse.find_in(2)).to eql(1)
-	#	end
-	#end

@@ -34,14 +34,16 @@ class Basket
     end
   end
 
-  def display
-    puts ">>>BASKET"
-    puts "ID\tNAME\tPRICE\tQUANT\t"
-    puts "--------------------------------------"
-    sum, sum_with_vat = compute_bill()
-    puts "--------------------------------------"
-    puts "Sum:\t\t" + "%.2f" % sum
-    puts "With VAT:\t" + "%.2f" % sum_with_vat
+  def to_s
+    sum, sum_with_vat, s_tmp = compute_bill()
+    s = ">>>BASKET\n"
+    s += "ID\tNAME\tPRICE\tQUANT\t\n"
+    s += "--------------------------------------\n"
+    s += s_tmp
+    s += "--------------------------------------\n"
+    s += "Sum:\t\t" + "%.2f" % sum + "\n"
+    s += "With VAT:\t" + "%.2f" % sum_with_vat + "\n"
+    return s
   end
 
   private
@@ -52,13 +54,14 @@ class Basket
 
   def compute_bill
     sum, sum_with_vat = 0, 0
+    s = ""
     @products.each do |item|
       product = warehouse.portfolio.find{|prod| prod.id == item[:item]}
-      puts product.to_s + "\t" + item[:count].to_s + "\t%.2f" % (product.price * item[:count])
+      s += product.to_s + "\t" + item[:count].to_s + "\t%.2f" % (product.price * item[:count]) + "\n"
       sum += product.price * item[:count]
       sum_with_vat += product.price * (1 + product.vat) * item[:count]
     end
-    return sum, sum_with_vat
+    return sum, sum_with_vat, s
   end
 
   def find_in(product_id)
