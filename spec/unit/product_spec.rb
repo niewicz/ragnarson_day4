@@ -1,7 +1,7 @@
 require_relative '../../lib/product.rb'
 
 RSpec.describe Product do
-  
+
   context "#initialize" do
     context "#name" do
       it "returns 'Book' when 'Book' given" do
@@ -75,15 +75,15 @@ RSpec.describe Product do
 
     context "#id" do
       it "difference between products' ids is never 0" do
-        p1 = Product.new("Cup", 2.99, 0.23)
-        p2 = Product.new("Ball", 8.70, 0.23)
-        expect(p1.id - p2.id).to_not eql(0)
+        product1 = Product.new("Cup", 2.99, 0.23)
+        product2 = Product.new("Ball", 8.70, 0.23)
+        expect(product1.id - product2.id).to_not eql(0)
       end
 
       it "2 succeeding products have ids' difference |1|" do
-        p1 = Product.new("Cup", 2.99, 0.23)
-        p2 = Product.new("Ball", 8.70, 0.23)
-        expect((p1.id - p2.id).abs).to eql(1)
+        product1 = Product.new("Cup", 2.99, 0.23)
+        product2 = Product.new("Ball", 8.70, 0.23)
+        expect((product1.id - product2.id).abs).to eql(1)
       end
     end
   end
@@ -98,7 +98,7 @@ RSpec.describe Product do
 
   context "#reset_id_count" do
     it "resets id counter" do
-      p1 = Product.new("Cup", 2.99, 0.23)
+      product1 = Product.new("Cup", 2.99, 0.23)
       Product.reset_id_count
       expect(Product.new("Ball", 8.70, 0.23).id).to eql(1)
     end
