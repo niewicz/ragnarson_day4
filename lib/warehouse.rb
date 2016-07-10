@@ -38,7 +38,7 @@ class Warehouse
       if index != nil && @products[index][:count] >= quantity
         @products[index][:count] -= quantity
         return true
-      else 
+      else
         return false
       end
     end
@@ -49,11 +49,11 @@ class Warehouse
   end
 
   def to_s
-    s = ""
+    output_string = ""
     @products.each do |item|
-      s += "ID:\t#{item[:item]}\tQUANTITY:\t#{item[:count]}\n"
+      output_string += "ID:\t#{item[:item]}\tQUANTITY:\t#{item[:count]}\n"
     end
-    return s
+    output_string
   end
 
   private
@@ -70,9 +70,9 @@ class Warehouse
 
     def find_in(product_id)
     @products.each_with_index do |item, index|
-      return index if item[:item] == product_id 
+      return index if item[:item] == product_id
     end
     nil
   end
-  
+
 end

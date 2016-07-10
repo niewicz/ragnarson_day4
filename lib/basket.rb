@@ -35,15 +35,14 @@ class Basket
   end
 
   def to_s
-    sum, sum_with_vat, s_tmp = compute_bill()
-    s = ">>>BASKET\n"
-    s += "ID\tNAME\tPRICE\tQUANT\t\n"
-    s += "--------------------------------------\n"
-    s += s_tmp
-    s += "--------------------------------------\n"
-    s += "Sum:\t\t" + "%.2f" % sum + "\n"
-    s += "With VAT:\t" + "%.2f" % sum_with_vat + "\n"
-    return s
+    sum, sum_with_vat, products_list_string = compute_bill()
+    output_string = ">>>BASKET\n"
+    output_string += "ID\tNAME\tPRICE\tQUANT\t\n"
+    output_string += "--------------------------------------\n"
+    output_string += products_list_string
+    output_string += "--------------------------------------\n"
+    output_string += "Sum:\t\t" + "%.2f" % sum + "\n"
+    output_string += "With VAT:\t" + "%.2f" % sum_with_vat + "\n"
   end
 
   private
@@ -54,19 +53,19 @@ class Basket
 
   def compute_bill
     sum, sum_with_vat = 0, 0
-    s = ""
+    products_list_string = ""
     @products.each do |item|
       product = warehouse.portfolio.find{|prod| prod.id == item[:item]}
-      s += product.to_s + "\t" + item[:count].to_s + "\t%.2f" % (product.price * item[:count]) + "\n"
+      products_list_string += product.to_s + "\t" + item[:count].to_s + "\t%.2f" % (product.price * item[:count]) + "\n"
       sum += product.price * item[:count]
       sum_with_vat += product.price * (1 + product.vat) * item[:count]
     end
-    return sum, sum_with_vat, s
+    return sum, sum_with_vat, products_list_string
   end
 
   def find_in(product_id)
     @products.each_with_index do |item, index|
-      return index if item[:item] == product_id 
+      return index if item[:item] == product_id
     end
     nil
   end
